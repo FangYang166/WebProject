@@ -10,7 +10,7 @@
 			            padding: 0;
 			        }
 			
-					//飞机场场景框
+					/*飞机场景框*/
 			        #wrap {
 			            width: 400px;
 			            height: 600px;
@@ -106,6 +106,11 @@
 		var createPlainTimer = null;
 		var bulletSpeed = 10;
 		var plainSpeed = 10;
+		
+		var mylife = document.getElementById("mylife");
+		myplan.life = 5;
+		
+
 		//初始化分数
 		var score = 0;
 		createPlain();
@@ -138,6 +143,35 @@
 			//让敌机降落
 			plain.timer = setInterval(function() {
 				plain.style.top = plain.offsetTop + plainSpeed + "px";
+				
+				//敌机、我机碰撞检测
+				var plainLeft = plain.offsetLeft;
+				var plainTop = plain.offsetTop;
+				var minX = myplan.offsetLeft - plain.offsetWidth;
+				var maxX = myplan.offsetLeft - myplain.offsetWidth;
+				var minY = myplan.offsetTop - plain.offsetHeight;
+				var maxY = myplan.offsetTop + myplain.offsetHeight;
+				
+				if (plainLeft >= minX && plainLeft <= maxX && plainTop >= minY && plainTop <= maxY) {
+					clearInterval(plain.timer);
+					
+					wrap.removeChild(plain);
+					myplan.life = myplan.life - 1;
+					
+					console.log()
+					mylife.style.height = myplan.life * 50 + "px";
+					
+					if(mylife <= 0){
+						clearInterval(myplan.timer);
+						wrap.removeChild(myplan);
+						
+						confirm("游戏结束，重来一次？");
+					}else{
+						window.close();
+					}
+				}
+				
+				
 				//敌机消失(敌机整机移除出去)
 				if (plain.offsetTop >= wrapHeight) {
 					clearInterval(plain.timer);
