@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrap {
+            width: 400px;
+            height: 600px;
+            margin: 20px auto;
+            position: relative;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        #myplan {
+            width: 98px;
+            height: 122px;
+            background: url("images/me.png");
+            background-size: 98px 122px;
+            position: absolute;
+            left: 151px;
+            bottom: 0;
+        }
+
+        .bullet {
+            width: 8px;
+            height: 18px;
+            background: url("images/bullet.png");
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="myplan"></div>
+</div>
+</body>
+<script>
+    var wrap = document.getElementById("wrap");
+    var myplan = document.getElementById("myplan");
+    var wrapHeight = wrap.offsetHeight;
+    var wrapWidth = wrap.offsetWidth;
+    var myplanHeight = myplan.offsetHeight
+    var myplanWidth = myplan.offsetWidth;//找到飞机场的高度宽度和飞机本身的高度和宽度
+    var wrapLeft = wrap.offsetLeft;//飞机场相对于父元素的距离
+    var wrapTop = wrap.offsetTop;
+    var maxLeft = wrapWidth - myplanWidth;
+    var maxTop = wrapHeight - myplanHeight;
+    var createBulletTimer = null;
+
+    createBullet();
+    function createBullet() {
+        var bullet = document.createElement("div");
+        bullet.className = "bullet";
+        wrap.appendChild(bullet);
+        //重新定位子弹的位置(根据飞机的位置来定义) 飞机距离左边的距离+飞机宽度的一半减去子弹宽度的一半
+        var x = myplan.offsetLeft + (myplanWidth / 2) - bullet.offsetWidth / 2;
+        var y = myplan.offsetTop - bullet.offsetHeight;
+        bullet.style.left = x + "px";
+        bullet.style.top = y + "px";
+        createBulletTimer = setTimeout(createBullet, 100);
+    }
+
+    wrap.onmousemove = function (e) {//当鼠标在该区域移动的时候 触发该function
+        var evt = window.event || e;//事件的兼容
+        evt.stopPropagation();//阻止事件的传递
+        var clientX = evt.clientX;//事件相对于文档的距离
+        var clientY = evt.clientY;
+        var x = clientX - wrapLeft - myplanWidth / 2;
+        var y = clientY - wrapTop - myplanHeight / 2;
+        if (x <= 0) {
+            x = 0;
+        }
+        if (y <= 0) {
+            y = 0;
+        }
+        if (x >= maxLeft) {
+            x = maxLeft;
+        }
+        if (y >= maxTop) {
+            y = maxTop;
+        }
+        myplan.style.left = x + "px";
+        myplan.style.top = y + "px";
+    }
+</script>
+</html>
