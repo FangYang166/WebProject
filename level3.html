@@ -116,9 +116,6 @@
 		
 		myplan.life = 5;
 		
-
-		//初始化分数
-		var score = 0;
 		createPlain();
 
 		function createPlain() { //表示创造敌机
@@ -158,8 +155,8 @@
 		                        clearInterval(plain.timer);
 		                        wrap.removeChild(plain);
 		                        score = score + plain.score;
-		                        if (confirm("已经过关 是否继续下一关")) {
-		
+		                        if (confirm("恭喜通关！！")) {
+											
 		                        } else {
 		                            window.close();
 		                        }
@@ -191,52 +188,51 @@
 						plain.life = 5;
 						plain.score = 5;
 					}
-				}
+					
+				//让敌机降落
+				wrap.appendChild(plain);
+				var maxLeft = wrapWidth - plain.offsetWidth; //最大左边的距离
+				var x = Math.round(Math.random() * maxLeft); //随机产生一个距离（在最大值和最小值之间）
+				plain.style.left = x + "px";
+				plain.timer = setInterval(function() {
+					plain.style.top = plain.offsetTop + plainSpeed + "px";
+					
+					var plainLeft = plain.offsetLeft;
+	                var plainTop = plain.offsetTop;
+	                var minX = myplan.offsetLeft - plain.offsetWidth;
+	                var maxX = myplan.offsetLeft + myplan.offsetWidth;
+	                var minY = myplan.offsetTop - plain.offsetHeight;
+	                var maxY = myplan.offsetTop + myplan.offsetHeight;
+					
 				
-				
-			//让敌机降落
-			wrap.appendChild(plain);
-			var maxLeft = wrapWidth - plain.offsetWidth; //最大左边的距离
-			var x = Math.round(Math.random() * maxLeft); //随机产生一个距离（在最大值和最小值之间）
-			plain.style.left = x + "px";
-			plain.timer = setInterval(function() {
-				plain.style.top = plain.offsetTop + plainSpeed + "px";
-				
-				var plainLeft = plain.offsetLeft;
-                var plainTop = plain.offsetTop;
-                var minX = myplan.offsetLeft - plain.offsetWidth;
-                var maxX = myplan.offsetLeft + myplan.offsetWidth;
-                var minY = myplan.offsetTop - plain.offsetHeight;
-                var maxY = myplan.offsetTop + myplan.offsetHeight;
-				
-			
-				
-				if (plainLeft >= minX && plainLeft <= maxX && plainTop >= minY && plainTop <= maxY) {
-                    //敌机与我方飞机发生碰撞
-                    clearInterval(plain.timer);
-                    wrap.removeChild(plain);
-                    myplan.life = myplan.life - 1;
-                    mylife.style.height = myplan.life * 100 + "px";
-                    
-                    //我机消失，重开游戏
-                    if (myplan.life <= 0) {//当生命值没有的时候就销毁
-                        clearInterval(myplan.timer);
-                        wrap.removeChild(myplan);
-                        if (confirm("游戏结束 是否重来一次")) {
-                            window.location.reload();
-                        } else {
-                            window.close();
-                        }
-                    }
-                }
-				
-				//敌机消失(敌机整机移除出去)
-				if (plain.offsetTop >= wrapHeight) {
-					clearInterval(plain.timer);
-					wrap.removeChild(plain);
-				}
-				}, 100);
-			createPlainTimer = setTimeout(createPlain, 500);
+					
+					if (plainLeft >= minX && plainLeft <= maxX && plainTop >= minY && plainTop <= maxY) {
+	                    //敌机与我方飞机发生碰撞
+	                    clearInterval(plain.timer);
+	                    wrap.removeChild(plain);
+	                    myplan.life = myplan.life - 1;
+	                    mylife.style.height = myplan.life * 100 + "px";
+	                    
+	                    //我机消失，重开游戏
+	                    if (myplan.life <= 0) {//当生命值没有的时候就销毁
+	                        clearInterval(myplan.timer);
+	                        wrap.removeChild(myplan);
+	                        if (confirm("游戏结束 是否重来一次")) {
+	                            window.location.reload();
+	                        } else {
+	                            window.close();
+	                        }
+	                    }
+	                }
+					
+					//敌机消失(敌机整机移除出去)
+					if (plain.offsetTop >= wrapHeight) {
+						clearInterval(plain.timer);
+						wrap.removeChild(plain);
+					}
+					}, 100);
+				createPlainTimer = setTimeout(createPlain, 500);
+			}	
 		}
 	
 	
@@ -273,7 +269,7 @@
 	                    if (plain.life <= 0) {
 	                        clearInterval(plain.timer);
 	                        score = score + plain.score;
-	                        document.getElementById("myscore").innerHTML = score;
+	                        document.getElementById("myScore").innerHTML = score;
 	                        wrap.removeChild(plain);
 	                        if(plain.score == 500){//表示boss被消灭
 	                            if(confirm("恭喜通关")){
