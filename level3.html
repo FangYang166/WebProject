@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>Title</title>
+		<title>第三关</title>
 		<style>
 			* {
 			            margin: 0;
@@ -18,12 +18,15 @@
 			            position: relative;
 			            border: 1px solid red;
 			            overflow: hidden;
+			            background-size: cover;
+			            background: url("images/bg3.jpg")repeat;
+			            
 			        }
 			
 			        #myplan {
 			            width: 98px;
 			            height: 122px;
-			            background: url("images/me.png");
+			            background: url("images/hero1.png");
 			            background-size: 98px 122px;
 			            position: absolute;
 			            left: 151px;
@@ -38,24 +41,24 @@
 			        }
 			
 			        .plain1 {
-			            width: 60px;
-			            height: 36px;
+			            width: 32px;
+			            height: 32px;
 			            position: absolute;
-			            background: url("images/plain1.png");
+			            background: url("images/e7.png");
 			        }
 			        
 			        .plain2{
-			        	width: 70px;
-			        	height: 92px;
+			        	width: 32px;
+			        	height: 32px;
 			        	position: absolute;
-						background: url("images/plain2.png");
+						background: url("images/e8.png");
 			        }
 			        
 			        .plain3{
-			        	width: 166px;
-			        	height: 256px;
+			        	width: 32px;
+			        	height: 32px;
 			        	position: absolute;
-			        	background: url("images/plain3.png");
+			        	background: url("images/e9.png");
 			        }
 			        
 			        #myScore{
@@ -78,7 +81,7 @@
 			        	left: 0;
 			        	bottom: 0;
 			        	width: 20px;
-			        	background: rgba(255,0,0,0.5);
+			        	background: rgba(255, 0, 0, 0.5);
 			        	border-radius: 10px;	
 			        }
 		</style>
@@ -95,7 +98,6 @@
 		var wrap = document.getElementById("wrap");
 		var myplan = document.getElementById("myplan");
 		
-		var mylife = document.getElementById("mylife");
 		
 		var wrapHeight = wrap.offsetHeight;
 		var wrapWidth = wrap.offsetWidth;
@@ -107,10 +109,10 @@
 		var maxTop = wrapHeight - myplanHeight;
 		var createBulletTimer = null;
 		var createPlainTimer = null;
-		var bulletSpeed = 10;
+		var bulletSpeed = 7;
 		var plainSpeed = 10;
 		
-		//var plain3Speed=10;
+		var plain3Speed=13;
 		
 		myplan.life = 5;
 		
@@ -123,10 +125,10 @@
 			var plain = document.createElement("div");
 			
 			//boss飞机出场时机
-			if (score > 50) {
+			if (score > 3000) {
 				plain.className = "plain3 plain";
-				plain.life = 100;
-				plain.score = 500;
+				plain.life = 300;
+				plain.score = 1500;
 				wrap.appendChild(plain);
 				var bossLeft = wrapWidth - plain.offsetWidth;
 				
@@ -182,12 +184,12 @@
 					//小飞机出场时机
 					if (score > 10) {
 						plain.className = "plain2 plain";
-						plain.life = 3;
-						plain.score = 5;
+						plain.life = 8;
+						plain.score = 10;
 					} else {
 						plain.className = "plain1 plain";
-						plain.life = 1;
-						plain.score = 1;
+						plain.life = 5;
+						plain.score = 5;
 					}
 				}
 				
@@ -237,9 +239,7 @@
 			createPlainTimer = setTimeout(createPlain, 500);
 		}
 	
-		
-		
-		
+	
 		createBullet();
     	function createBullet() {
 	        var bullet = document.createElement("div");
@@ -276,17 +276,11 @@
 	                        document.getElementById("myscore").innerHTML = score;
 	                        wrap.removeChild(plain);
 	                        if(plain.score == 500){//表示boss被消灭
-	                            if(confirm("通关是否进行下一轮")){
-	                                    window.location.href ="level2.html";
+	                            if(confirm("恭喜通关")){
+	                            	
 	                            }
 	                        }
 	                    }
-	                    /*
-	                     clearInterval(plain.timer);
-	                     clearInterval(bullet.timer);
-	                     wrap.removeChild(plain);
-	                     wrap.removeChild(bullet);
-	                     */
 	                }
 	            }
 	

@@ -3,12 +3,12 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>飞机大战第一关</title>
+		<title>第二关</title>
 		<style>
 			* {
-			            margin: 0;
-			            padding: 0;
-			        }
+			    margin: 0;
+			    padding: 0;      
+			  }
 			
 					/*飞机场景框*/
 			        #wrap {
@@ -19,7 +19,7 @@
 			            border: 1px solid red;
 			            overflow: hidden;
 			            background-size: cover;
-			            background: url("images/bg1.jpg")repeat;
+			            background: url("images/bg2.jpg")repeat;
 			        }
 			
 			        #myplan {
@@ -40,24 +40,24 @@
 			        }
 			
 			        .plain1 {
-			            width: 26px;
-			            height: 64px;
+			            width: 32px;
+			            height: 32px;
 			            position: absolute;
-			            background: url("images/e1.png");
+			            background: url("images/e4.png");
 			        }
 			        
 			        .plain2{
-			        	width: 52px;
-			        	height: 64px;
+			        	width: 32px;
+			        	height: 32px;
 			        	position: absolute;
-						background: url("images/e2.png");
+						background: url("images/e5.png");
 			        }
 			        
 			        .plain3{
 			        	width: 32px;
 			        	height: 32px;
 			        	position: absolute;
-			        	background: url("images/e3.png");
+			        	background: url("images/e6.png");
 			        }
 			        
 			        #myScore{
@@ -109,8 +109,8 @@
 		var maxTop = wrapHeight - myplanHeight;
 		var createBulletTimer = null;
 		var createPlainTimer = null;
-		var bulletSpeed = 10;
-		var plainSpeed = 10;
+		var bulletSpeed = 8;
+		var plainSpeed = 12;
 		
 		var plain3Speed=10;
 		
@@ -125,10 +125,10 @@
 			var plain = document.createElement("div");
 			
 			//boss飞机出场时机
-			if (score > 50) {
+			if (score > 1000) {
 				plain.className = "plain3 plain";
-				plain.life = 100;
-				plain.score = 500;
+				plain.life = 200;
+				plain.score = 1000;
 				wrap.appendChild(plain);
 				var bossLeft = wrapWidth - plain.offsetWidth;
 				
@@ -184,12 +184,12 @@
 					//小飞机出场时机
 					if (score > 10) {
 						plain.className = "plain2 plain";
-						plain.life = 3;
-						plain.score = 5;
+						plain.life = 5;
+						plain.score = 8;
 					} else {
 						plain.className = "plain1 plain";
-						plain.life = 1;
-						plain.score = 1;
+						plain.life = 3;
+						plain.score = 3;
 					}
 				}
 				
@@ -273,22 +273,14 @@
 	                    if (plain.life <= 0) {
 	                        clearInterval(plain.timer);
 	                        score = score + plain.score;
-	                        document.getElementById("myScore").innerHTML = score;
+	                        document.getElementById("myscore").innerHTML = score;
 	                        wrap.removeChild(plain);
 	                        if(plain.score == 500){//表示boss被消灭
 	                            if(confirm("通关是否进行下一轮")){
-	                                    window.location.href ="level2.html";
+	                                    window.location.href ="level3.html";
 	                            }
 	                        }
 	                    }
-	                    
-	                    /*
-	                     clearInterval(plain.timer);
-	                     clearInterval(bullet.timer);
-	                     wrap.removeChild(plain);
-	                     wrap.removeChild(bullet);
-	                    */
-	                
 	                }
 	            }
 	
