@@ -10,7 +10,7 @@
 			            padding: 0;
 			        }
 			
-					/*é£æœºåœºæ™¯æ¡†*/
+					/*·É»ú³¡¾°¿ò*/
 			        #wrap {
 			            width: 400px;
 			            height: 600px;
@@ -100,8 +100,8 @@
 		var wrapHeight = wrap.offsetHeight;
 		var wrapWidth = wrap.offsetWidth;
 		var myplanHeight = myplan.offsetHeight
-		var myplanWidth = myplan.offsetWidth; //æ‰¾åˆ°é£æœºåœºçš„é«˜åº¦å®½åº¦å’Œé£æœºæœ¬èº«çš„é«˜åº¦å’Œå®½åº¦
-		var wrapLeft = wrap.offsetLeft; //é£æœºåœºç›¸å¯¹äºçˆ¶å…ƒç´ çš„è·ç¦»
+		var myplanWidth = myplan.offsetWidth; //ÕÒµ½·É»ú³¡µÄ¸ß¶È¿í¶ÈºÍ·É»ú±¾ÉíµÄ¸ß¶ÈºÍ¿í¶È
+		var wrapLeft = wrap.offsetLeft; //·É»ú³¡Ïà¶ÔÓÚ¸¸ÔªËØµÄ¾àÀë
 		var wrapTop = wrap.offsetTop;
 		var maxLeft = wrapWidth - myplanWidth;
 		var maxTop = wrapHeight - myplanHeight;
@@ -115,14 +115,14 @@
 		myplan.life = 5;
 		
 
-		//åˆå§‹åŒ–åˆ†æ•°
+		//³õÊ¼»¯·ÖÊı
 		var score = 0;
 		createPlain();
 
-		function createPlain() { //è¡¨ç¤ºåˆ›é€ æ•Œæœº
+		function createPlain() { //±íÊ¾´´ÔìµĞ»ú
 			var plain = document.createElement("div");
 			
-			//bossé£æœºå‡ºåœºæ—¶æœº
+			//boss·É»ú³ö³¡Ê±»ú
 			if (score > 50) {
 				plain.className = "plain3 plain";
 				plain.life = 100;
@@ -134,14 +134,14 @@
 	            plain.timer = setInterval(function () {
 	                plain.style.left = plain.offsetLeft + plain3Speed + "px";
 	                if (plain.offsetLeft >= bossLeft) {
-	                    plain3Speed = -Math.abs(plain3Speed);//å½“bossåˆ°è¾¾å·¦è¾¹åšå¤§çš„è·ç¦»çš„æ—¶å€™ æ–¹å‘åå‘
+	                    plain3Speed = -Math.abs(plain3Speed);//µ±bossµ½´ï×ó±ß×ö´óµÄ¾àÀëµÄÊ±ºò ·½Ïò·´Ïò
 	                }
 	                if (plain.offsetLeft <= 0) {
 	                    plain3Speed = Math.abs(plain3Speed);
 	                }
 	                
 	                
-		            //æ•Œæœºã€æˆ‘æœºç¢°æ’æ£€æµ‹
+		            //µĞ»ú¡¢ÎÒ»úÅö×²¼ì²â
 					var plainLeft = plain.offsetLeft;
 					var plainTop = plain.offsetTop;
 					var minX = myplan.offsetLeft - plain.offsetWidth;
@@ -156,7 +156,7 @@
 		                        clearInterval(plain.timer);
 		                        wrap.removeChild(plain);
 		                        score = score + plain.score;
-		                        if (confirm("å·²ç»è¿‡å…³ æ˜¯å¦ç»§ç»­ä¸‹ä¸€å…³")) {
+		                        if (confirm("ÒÑ¾­¹ı¹Ø ÊÇ·ñ¼ÌĞøÏÂÒ»¹Ø")) {
 		
 		                        } else {
 		                            window.close();
@@ -170,7 +170,7 @@
 								clearInterval(myplan.timer);
 								wrap.removeChild(myplan);
 								
-								if(confirm("æ¸¸æˆç»“æŸï¼Œé‡æ¥ä¸€æ¬¡ï¼Ÿ")){
+								if(confirm("ÓÎÏ·½áÊø£¬ÖØÀ´Ò»´Î£¿")){
 									window.location.reload();
 							}else{
 								window.close();
@@ -179,7 +179,7 @@
 		            }
 				}, 200);
 				} else {
-					//å°é£æœºå‡ºåœºæ—¶æœº
+					//Ğ¡·É»ú³ö³¡Ê±»ú
 					if (score > 10) {
 						plain.className = "plain2 plain";
 						plain.life = 3;
@@ -192,10 +192,10 @@
 				}
 				
 				
-			//è®©æ•Œæœºé™è½
+			//ÈÃµĞ»ú½µÂä
 			wrap.appendChild(plain);
-			var maxLeft = wrapWidth - plain.offsetWidth; //æœ€å¤§å·¦è¾¹çš„è·ç¦»
-			var x = Math.round(Math.random() * maxLeft); //éšæœºäº§ç”Ÿä¸€ä¸ªè·ç¦»ï¼ˆåœ¨æœ€å¤§å€¼å’Œæœ€å°å€¼ä¹‹é—´ï¼‰
+			var maxLeft = wrapWidth - plain.offsetWidth; //×î´ó×ó±ßµÄ¾àÀë
+			var x = Math.round(Math.random() * maxLeft); //Ëæ»ú²úÉúÒ»¸ö¾àÀë£¨ÔÚ×î´óÖµºÍ×îĞ¡ÖµÖ®¼ä£©
 			plain.style.left = x + "px";
 			plain.timer = setInterval(function() {
 				plain.style.top = plain.offsetTop + plainSpeed + "px";
@@ -210,17 +210,17 @@
 			
 				
 				if (plainLeft >= minX && plainLeft <= maxX && plainTop >= minY && plainTop <= maxY) {
-                    //æ•Œæœºä¸æˆ‘æ–¹é£æœºå‘ç”Ÿç¢°æ’
+                    //µĞ»úÓëÎÒ·½·É»ú·¢ÉúÅö×²
                     clearInterval(plain.timer);
                     wrap.removeChild(plain);
                     myplan.life = myplan.life - 1;
                     mylife.style.height = myplan.life * 100 + "px";
                     
-                    //æˆ‘æœºæ¶ˆå¤±ï¼Œé‡å¼€æ¸¸æˆ
-                    if (myplan.life <= 0) {//å½“ç”Ÿå‘½å€¼æ²¡æœ‰çš„æ—¶å€™å°±é”€æ¯
+                    //ÎÒ»úÏûÊ§£¬ÖØ¿ªÓÎÏ·
+                    if (myplan.life <= 0) {//µ±ÉúÃüÖµÃ»ÓĞµÄÊ±ºò¾ÍÏú»Ù
                         clearInterval(myplan.timer);
                         wrap.removeChild(myplan);
-                        if (confirm("æ¸¸æˆç»“æŸ æ˜¯å¦é‡æ¥ä¸€æ¬¡")) {
+                        if (confirm("ÓÎÏ·½áÊø ÊÇ·ñÖØÀ´Ò»´Î")) {
                             window.location.reload();
                         } else {
                             window.close();
@@ -228,7 +228,7 @@
                     }
                 }
 				
-				//æ•Œæœºæ¶ˆå¤±(æ•Œæœºæ•´æœºç§»é™¤å‡ºå»)
+				//µĞ»úÏûÊ§(µĞ»úÕû»úÒÆ³ı³öÈ¥)
 				if (plain.offsetTop >= wrapHeight) {
 					clearInterval(plain.timer);
 					wrap.removeChild(plain);
@@ -245,28 +245,28 @@
 	        var bullet = document.createElement("div");
 	        bullet.className = "bullet";
 	        wrap.appendChild(bullet);
-	        //é‡æ–°å®šä½å­å¼¹çš„ä½ç½®(æ ¹æ®é£æœºçš„ä½ç½®æ¥å®šä¹‰) é£æœºè·ç¦»å·¦è¾¹çš„è·ç¦»+é£æœºå®½åº¦çš„ä¸€åŠå‡å»å­å¼¹å®½åº¦çš„ä¸€åŠ
+	        //ÖØĞÂ¶¨Î»×Óµ¯µÄÎ»ÖÃ(¸ù¾İ·É»úµÄÎ»ÖÃÀ´¶¨Òå) ·É»ú¾àÀë×ó±ßµÄ¾àÀë+·É»ú¿í¶ÈµÄÒ»°ë¼õÈ¥×Óµ¯¿í¶ÈµÄÒ»°ë
 	        var x = myplan.offsetLeft + (myplanWidth / 2) - bullet.offsetWidth / 2;
 	        var y = myplan.offsetTop - bullet.offsetHeight;
 	        bullet.style.left = x + "px";
 	        bullet.style.top = y + "px";
-	        //å­å¼¹å‘å°„çš„ä»£ç 
+	        //×Óµ¯·¢ÉäµÄ´úÂë
 	        bullet.timer = setInterval(function () {
 	            bullet.style.top = bullet.offsetTop - bulletSpeed + "px";
 	
-	            //è¿™é‡Œæ˜¯å­å¼¹çš„ç§»åŠ¨  éœ€è¦åœ¨æ­¤å¤„æ£€æŸ¥å®ƒæ˜¯å¦ç¢°æ’åˆ°äº†æ•Œæœº
+	            //ÕâÀïÊÇ×Óµ¯µÄÒÆ¶¯  ĞèÒªÔÚ´Ë´¦¼ì²éËüÊÇ·ñÅö×²µ½ÁËµĞ»ú
 	            var bulletX = bullet.offsetLeft;
 	            var bulletY = bullet.offsetTop;
-	            var plainList = document.getElementsByClassName("plain");//è¡¨ç¤ºæ‰€æœ‰çš„æ•Œæœº
+	            var plainList = document.getElementsByClassName("plain");//±íÊ¾ËùÓĞµÄµĞ»ú
 	            for (var i = 0; i < plainList.length; i++) {
-	                var plain = plainList[i];//è¡¨ç¤ºä¸€ä¸ªä¸ªçš„æ•Œæœº
+	                var plain = plainList[i];//±íÊ¾Ò»¸ö¸öµÄµĞ»ú
 	                var plainLeft = plain.offsetLeft;
 	                var plainTop = plain.offsetTop;
 	                var minX = plainLeft - bullet.offsetWidth;
 	                var maxX = plainLeft + plain.offsetWidth;
 	                var minY = plainTop - bullet.offsetHeight;
 	                var maxY = plainTop + plain.offsetHeight;
-	                if (bulletX >= minX && bulletX <= maxX && bulletY >= minY && bulletY <= maxY) {//è¡¨ç¤ºå‘ç”Ÿäº†ç¢°æ’
+	                if (bulletX >= minX && bulletX <= maxX && bulletY >= minY && bulletY <= maxY) {//±íÊ¾·¢ÉúÁËÅö×²
 	                    clearInterval(bullet.timer);
 	                    wrap.removeChild(bullet);
 	                    plain.life = plain.life - 1;
@@ -275,8 +275,8 @@
 	                        score = score + plain.score;
 	                        document.getElementById("myscore").innerHTML = score;
 	                        wrap.removeChild(plain);
-	                        if(plain.score == 500){//è¡¨ç¤ºbossè¢«æ¶ˆç­
-	                            if(confirm("é€šå…³æ˜¯å¦è¿›è¡Œä¸‹ä¸€è½®")){
+	                        if(plain.score == 500){//±íÊ¾boss±»ÏûÃğ
+	                            if(confirm("Í¨¹ØÊÇ·ñ½øĞĞÏÂÒ»ÂÖ")){
 	                                    window.location.href ="level2.html";
 	                            }
 	                        }
@@ -290,25 +290,25 @@
 	                }
 	            }
 	
-	            //å½“å­å¼¹åˆ°è¾¾ä¸´ç•Œæ¡ä»¶ä»¥å  éœ€è¦æ¶ˆå¤±(ä»é¡µé¢åšä¸€ä¸ªæ¸…é™¤)
+	            //µ±×Óµ¯µ½´ïÁÙ½çÌõ¼şÒÔºó  ĞèÒªÏûÊ§(´ÓÒ³Ãæ×öÒ»¸öÇå³ı)
 	            /*
 	             if (bullet.offsetTop <= 0) {
-	             clearInterval(bullet.timer);//è®©å­å¼¹åœæ­¢è¿åŠ¨
-	             wrap.removeChild(bullet);//å°†å­å¼¹ä»é£æœºåœºç§»é™¤
+	             clearInterval(bullet.timer);//ÈÃ×Óµ¯Í£Ö¹ÔË¶¯
+	             wrap.removeChild(bullet);//½«×Óµ¯´Ó·É»ú³¡ÒÆ³ı
 	             }
 	             */
 	            if (getStyleAttr(bullet, "top") <= 0) {
-	                clearInterval(bullet.timer);//è®©å­å¼¹åœæ­¢è¿åŠ¨
-	                wrap.removeChild(bullet);//å°†å­å¼¹ä»é£æœºåœºç§»é™¤
+	                clearInterval(bullet.timer);//ÈÃ×Óµ¯Í£Ö¹ÔË¶¯
+	                wrap.removeChild(bullet);//½«×Óµ¯´Ó·É»ú³¡ÒÆ³ı
 	            }
-	        }, 100);//è¡¨ç¤º0.1ç§’ 1000æ¯«ç§’ = 1ç§’
+	        }, 100);//±íÊ¾0.1Ãë 1000ºÁÃë = 1Ãë
 	        createBulletTimer = setTimeout(createBullet, 200);
 	    }
 		
-		wrap.onmousemove = function(e) { //å½“é¼ æ ‡åœ¨è¯¥åŒºåŸŸç§»åŠ¨çš„æ—¶å€™ è§¦å‘è¯¥function
-			var evt = window.event || e; //äº‹ä»¶çš„å…¼å®¹
-			evt.stopPropagation(); //é˜»æ­¢äº‹ä»¶çš„ä¼ é€’
-			var clientX = evt.clientX; //äº‹ä»¶ç›¸å¯¹äºæ–‡æ¡£çš„è·ç¦»
+		wrap.onmousemove = function(e) { //µ±Êó±êÔÚ¸ÃÇøÓòÒÆ¶¯µÄÊ±ºò ´¥·¢¸Ãfunction
+			var evt = window.event || e; //ÊÂ¼şµÄ¼æÈİ
+			evt.stopPropagation(); //×èÖ¹ÊÂ¼şµÄ´«µİ
+			var clientX = evt.clientX; //ÊÂ¼şÏà¶ÔÓÚÎÄµµµÄ¾àÀë
 			var clientY = evt.clientY;
 			var x = clientX - wrapLeft - myplanWidth / 2;
 			var y = clientY - wrapTop - myplanHeight / 2;
